@@ -11,6 +11,7 @@ struct AddView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
+//    @State private var name = "New expense"
     @State private var type = "Personal"
     @State private var amount = 0.0
     
@@ -21,29 +22,38 @@ struct AddView: View {
     let localCurrency = Locale.current.currency?.identifier ?? "USD"
     
     var body: some View {
-        NavigationStack {
-            Form {
-                TextField("Name", text: $name)
-                
-                Picker("Type", selection: $type) {
-                    ForEach(types, id: \.self) {
-                        Text($0)
-                    }
+        
+        Form {
+            TextField("Name", text: $name)
+            
+            Picker("Type", selection: $type) {
+                ForEach(types, id: \.self) {
+                    Text($0)
                 }
-                .pickerStyle(.segmented)
-                
-                TextField("Amount", value: $amount, format: .currency(code: localCurrency))
-                    .keyboardType(.decimalPad)
             }
-            .navigationTitle("Add new expense")
-            .toolbar {
+            .pickerStyle(.segmented)
+            
+            TextField("Amount", value: $amount, format: .currency(code: localCurrency))
+                .keyboardType(.decimalPad)
+        }
+        .navigationTitle("Add new expense")
+//        .navigationTitle($name)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement:. confirmationAction) {
                 Button("Save") {
                     let item = ExpenseItem(name: name, type: type, amount: amount)
                     expenses.items.append(item)
                     dismiss()
                 }
             }
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", role: .cancel) { dismiss() }
+            }
         }
+        
+        
     }
 }
 
