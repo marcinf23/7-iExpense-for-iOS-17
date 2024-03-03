@@ -24,7 +24,9 @@ struct ExpenseSection: View {
                             .font(.headline)
                         Text(item.type)
                     }
+                    
                     Spacer()
+                    
                     Text(item.amount, format: .currency(code: localCurrency))
                         .style(for: item)
                 }

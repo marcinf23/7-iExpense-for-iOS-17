@@ -13,8 +13,7 @@ struct ContentView: View {
     @State private var expenses = Expenses()
     
     @State private var showingAddExpense = false
-    
-    
+        
     var body: some View {
         NavigationStack {
             List {
@@ -53,7 +52,7 @@ struct ContentView: View {
     }
     
     func removeBusinessItems(at offsets: IndexSet) {
-        removeItems(at: offsets, in: expenses.personalItems)
+        removeItems(at: offsets, in: expenses.businessItems)
     }
 }
 

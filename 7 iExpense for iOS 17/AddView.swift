@@ -14,11 +14,11 @@ struct AddView: View {
     @State private var type = "Personal"
     @State private var amount = 0.0
     
-    let localCurrency = Locale.current.currency?.identifier ?? "USD"
     
     var expenses: Expenses
     
     let types = ["Business", "Personal"]
+    let localCurrency = Locale.current.currency?.identifier ?? "USD"
     
     var body: some View {
         NavigationStack {
